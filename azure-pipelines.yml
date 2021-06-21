@@ -3,9 +3,18 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+variables:
+  ARM_PASS: $(adminPass)
+
 trigger:
 - master
 
 pool:
   vmImage: ubuntu-latest
 
+steps:
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '101-webapp-linux-managed-mysql'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
